@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const AdminModel = require("../models/adminModel");
+const VoterModel = require("../models/voterModel");
 
 const isAdmin = asyncHandler(async (req, res, next) => {
   const { token } = req.cookies;
@@ -14,4 +15,16 @@ const isAdmin = asyncHandler(async (req, res, next) => {
   next();
 });
 
-module.exports = { isAdmin };
+const isVoter = asyncHandler(async (req, res, next) => {
+  const { voterToken } = req.cookies;
+  if (!voterToken) {
+    res.status(401);
+    throw new Error("You are not a voter");
+  }
+
+  const decoded = jwt.verify(voterToken, process.env.JWT_SECRET);
+  req.voter = await VoterModel.findById(decoded._id);
+  next();
+});
+
+module.exports = { isAdmin, isVoter };

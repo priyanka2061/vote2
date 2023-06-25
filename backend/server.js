@@ -23,9 +23,11 @@ app.use(cookieParser());
 
 // Routes Call
 const adminRoutes = require("./routes/adminRoutes");
+const voterRoutes = require("./routes/voterRoutes");
 
 // Routes Use
 app.use("/api/admin", adminRoutes);
+app.use("/api/voter", voterRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
