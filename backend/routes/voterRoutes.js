@@ -9,6 +9,7 @@ const {
   voterLogin,
   logout,
   profile,
+  vote,
 } = require("../controller/voterController");
 const { isAdmin, isVoter } = require("../middleware/authMiddleware");
 
@@ -23,5 +24,6 @@ router.delete("/delete/:id", deleteVoter);
 router.post("/voterlogin", voterLogin);
 router.get("/logout", logout);
 router.get("/me", isVoter, profile);
+router.put("/vote/:id", isVoter, vote);
 
 module.exports = router;

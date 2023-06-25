@@ -1,6 +1,10 @@
+// Models
 const VoterModel = require("../models/voterModel");
+const CandidateModel = require("../models/candidateModel");
+// Modules
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
+// Utils
 const { sendTokenVoter } = require("../utils/sendToken");
 
 // Get One Voter
@@ -156,3 +160,28 @@ exports.profile = asyncHandler(async (req, res) => {
 });
 
 // Vote Functionality
+exports.vote = asyncHandler(async (req, res) => {
+  const voter = await VoterModel.findById(req.voter._id);
+  if (voter.isVoted === true) {
+    res.status(400);
+    throw new Error("Your have already voted");
+  }
+
+  const { id } = req.params;
+  const candidate = await CandidateModel.findById(id);
+  if (!candidate) {
+    res.status(404).json({ message: "Voter not found" });
+  }
+
+  candidate.voteCount++;
+  await candidate.save();
+
+  voter.isVoted = true;
+  await voter.save();
+
+  res.status(200).json({
+    message: "Voting Done... Thank you for your Contribution",
+    voteCount: candidate.voteCount,
+    isVoted: voter.isVoted,
+  });
+});
