@@ -1,17 +1,40 @@
 const express = require("express");
-const app = express();
+require("dotenv").config();
 const cors = require("cors");
-const port = 4000;
+const app = express();
+const PORT = process.env.PORT;
+const cookieParser = require("cookie-parser");
+// Database
+const connectDB = require("./config/database");
+connectDB();
+// Middleware
+const { errorHandler } = require("./middleware/errorHandler");
 
-const api = require("./routes/api");
-
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-app.use(cors());
+// Routes Call
+const adminRoutes = require("./routes/adminRoutes");
 
-app.use("/api", api);
+// Routes Use
+app.use("/api/admin", adminRoutes);
 
-app.listen(port, () => {
-  console.log(`port started at ${port}`);
+// Test Route
+app.get("/", (req, res) => {
+  res.send("Server run successfully");
+});
+
+// Error Handler
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+  console.log(`PORT started at ${PORT}`);
 });
