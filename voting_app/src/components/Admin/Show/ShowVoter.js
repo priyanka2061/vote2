@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import Admin from "../Layout/Admin";
+import { SERVER_URL } from "../../../API/api";
 
 // export default class ShowVoter extends React.Component {
 //   state = {
@@ -57,7 +58,7 @@ const ShowVoter = () => {
 
   const fetchVoters = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/voter/all", {
+      const response = await fetch(`${SERVER_URL}/api/voter/all`, {
         withCredentials: true,
       });
       const data = await response.json();
@@ -69,7 +70,7 @@ const ShowVoter = () => {
 
   const deleteButtonHandler = async (_id) => {
     axios
-      .delete(`http://localhost:8000/api/voter/delete/${_id}`, {
+      .delete(`${SERVER_URL}/api/voter/delete/${_id}`, {
         withCredentials: true,
       })
       .then((res) => {

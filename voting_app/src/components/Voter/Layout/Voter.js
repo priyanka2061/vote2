@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { SERVER_URL } from "../../../API/api";
 
 const Voter = () => {
   const navigate = useNavigate();
 
   const handleSubmitLogout = () => {
     axios
-      .get("http://localhost:8000/api/voter/logout", {
+      .get(`${SERVER_URL}/api/voter/logout`, {
         withCredentials: true,
       })
       .then((res) => {

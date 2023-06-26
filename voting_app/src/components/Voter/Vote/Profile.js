@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Voter from "../Layout/Voter";
+import { SERVER_URL } from "../../../API/api";
 
 const Profile = () => {
   const [voterDetails, setVoterDetails] = useState("");
@@ -12,7 +13,7 @@ const Profile = () => {
 
   const fetchVoter = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/voter/me`, {
+      const response = await axios.get(`${SERVER_URL}/api/voter/me`, {
         withCredentials: true,
       });
       // console.log(response, "response");

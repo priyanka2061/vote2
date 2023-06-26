@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Logo from "../img/voting-app-high-resolution-logo-color-on-transparent-background.png";
+import { SERVER_URL } from "../../API/api";
 
 // export default class Login extends React.Component {
 //   state = {
@@ -123,7 +124,7 @@ const Login = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/admin/login",
+        `${SERVER_URL}/api/admin/login`,
         {
           adminName,
           adminPassword,
@@ -154,7 +155,7 @@ const Login = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/voter/voterlogin",
+        `${SERVER_URL}/api/voter/voterlogin`,
         { name, mobile, adhar },
         {
           headers: {

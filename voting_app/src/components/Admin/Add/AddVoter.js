@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Admin from "../Layout/Admin";
+import { SERVER_URL } from "../../../API/api";
 
 // export default class AddVoter extends React.Component {
 //   state = {
@@ -92,7 +93,7 @@ const AddVoter = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/voter/add",
+        `${SERVER_URL}/api/voter/add`,
         { name, mobile, adhar },
         {
           withCredentials: true,

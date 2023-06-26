@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { SERVER_URL } from "../../../API/api";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const Admin = () => {
   const handleSubmitLogout = (e) => {
     e.preventDefault();
     axios
-      .get("http://localhost:8000/api/admin/logout", {
+      .get(`${SERVER_URL}/api/admin/logout`, {
         withCredentials: true,
       })
       .then((res) => {

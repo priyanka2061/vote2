@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import Voter from "../Layout/Voter";
+import { SERVER_URL } from "../../../API/api";
 
 const Vote = () => {
   const [candidates, setCandidates] = useState([]);
@@ -12,7 +13,7 @@ const Vote = () => {
 
   const fetchCandidates = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/candidate/all", {
+      const response = await fetch(`${SERVER_URL}/api/candidate/all`, {
         withCredentials: true,
       });
       const data = await response.json();
@@ -25,7 +26,7 @@ const Vote = () => {
   const voteHandler = async (_id) => {
     axios
       .put(
-        `http://localhost:8000/api/voter/vote/${_id}`,
+        `${SERVER_URL}/api/voter/vote/${_id}`,
         {
           _id,
         },
