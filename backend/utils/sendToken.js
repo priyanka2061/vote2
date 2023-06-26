@@ -4,8 +4,8 @@ exports.sendToken = (res, admin, message, statusCode) => {
   const options = {
     expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
     httpOnly: true,
-    // secure: true,
-    // sameSite: "none",
+    secure: true,
+    sameSite: "none",
   };
   // 15days * 24hours * 60mins * 60secs * 1000ms
 
@@ -23,8 +23,8 @@ exports.sendTokenVoter = (res, voter, message, statusCode) => {
   const options = {
     expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
     httpOnly: true,
-    // secure: true,
-    // sameSite: "none",
+    secure: true,
+    sameSite: "none",
   };
 
   res.status(statusCode).cookie("voterToken", voterToken, options).json({
