@@ -4,51 +4,6 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import Admin from "../Layout/Admin";
 import { SERVER_URL } from "../../../API/api";
 
-// export default class ShowVoter extends React.Component {
-//   state = {
-//     voters: [],
-//   };
-
-//   componentDidMount() {
-//     axios
-//       .get(`http://localhost:8000/api/voter/all`)
-//       .then((res) => {
-//         const voters = res.data.voterList;
-//         // this.setState({ voters });
-//         console.log(voters);
-//       })
-//       .catch((err) => {
-//         console.log("!!! Error !!!" + err);
-//       });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <div className="show">
-//           <table border="1" width="100%">
-//             <tr>
-//               <th>Voter Name</th>
-//               <th>Mobile No.</th>
-//               <th>Aadhaar No. </th>
-//             </tr>
-//             {this.state.voters.map((item) => {
-//               return (
-//                 <tr>
-//                   <td>{item.candidateName}</td>
-//                   <td>{item.candidatePartyName}</td>
-//                   <td>{item.voteCount}</td>
-//                 </tr>
-//               );
-//             })}
-//           </table>
-//           <Logout />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
 const ShowVoter = () => {
   const [voters, setVoters] = useState([]);
 

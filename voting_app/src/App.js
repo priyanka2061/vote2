@@ -10,6 +10,7 @@ import ShowVoter from "./components/Admin/Show/ShowVoter"; // To show voter
 import Voter from "./components/Voter/Layout/Voter"; // Voter Header
 import Profile from "./components/Voter/Vote/Profile"; // To show Profile
 import Vote from "./components/Voter/Vote/Vote"; // To Vote
+import OTPPage from "./components/Login/OTPPage"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} exact />
+          <Route path="/OtpPage" element={<OTPPage/>}/>
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/add_candidate" element={<AddCandidate />} />
           <Route path="/admin/add_voter" element={<AddVoter />} />

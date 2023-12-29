@@ -4,50 +4,6 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import Admin from "../Layout/Admin";
 import { SERVER_URL } from "../../../API/api";
 
-// export default class ShowCandidate extends React.Component {
-//   state = {
-//     candidates: [],
-//   };
-
-//   componentDidMount() {
-//     axios
-//       .get(`http://localhost:8000/api/candidate/all`)
-//       .then((res) => {
-//         const candidates = res.data.candidate;
-//         // this.setState({ candidates });
-//         console.log(candidates);
-//       })
-//       .catch((err) => {
-//         console.log("!!! Error !!!" + err);
-//       });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <div className="show">
-//           <table border="1" width="100%">
-//             <tr>
-//               <th>Candidate Name</th>
-//               <th>Party Name</th>
-//               <th>Vote Count</th>
-//             </tr>
-//             {this.state.candidates.map((item) => {
-//               return (
-//                 <tr>
-//                   <td>{item.candidateName}</td>
-//                   <td>{item.candidatePartyName}</td>
-//                   <td>{item.voteCount}</td>
-//                 </tr>
-//               );
-//             })}
-//           </table>
-//           <Logout />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
 
 const ShowCandidate = () => {
   const [candidates, setCandidates] = useState([]);
