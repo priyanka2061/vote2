@@ -1,6 +1,6 @@
 # MERN Voting App
 
-- June 25th, 2023 12:09 PM
+- DEC 2023
 - Version 2.0.0
 - New Knowledge
 - New Updates
@@ -8,6 +8,6 @@
 
 ---
 
-- September 7th, 2022 11:30 AM
+- NOVEMBER 7th, 2023 11:30 AM
 - Version 1.0.0
 - Online Voting App using React js and MongoDb Express Js Node Js
