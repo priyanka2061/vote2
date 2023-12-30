@@ -9,7 +9,7 @@ exports.getOneCandidate = asyncHandler(async (req, res) => {
   const candidate = await CandidateModel.findOne(id);
   if (!candidate) {
     res.status(404);
-    throw new Error("No Candidate Found");
+    // throw new Error("No Candidate Found");
   }
 
   res.status(200).json({ candidate });
@@ -20,7 +20,7 @@ exports.getAllCandidates = asyncHandler(async (req, res) => {
   const allCandidates = await CandidateModel.find();
   if (allCandidates.length === 0) {
     res.status(404);
-    throw new Error("Something went wrong");
+    // throw new Error("Something went wrong");
   }
 
   res.status(200).json({
@@ -50,7 +50,7 @@ exports.updateCandidate = asyncHandler(async (req, res) => {
   const candidate = await CandidateModel.findById(id);
   if (!candidate) {
     res.status(404);
-    throw new Error("No Candidate found");
+    // throw new Error("No Candidate found");
   }
 
   const updatedCandidate = await CandidateModel.findByIdAndUpdate(
@@ -70,7 +70,7 @@ exports.deleteCandidate = asyncHandler(async (req, res) => {
   const candidate = await CandidateModel.findByIdAndDelete(id);
   if (!candidate) {
     res.status(404);
-    throw new Error("No Candidate found");
+    // throw new Error("No Candidate found");
   }
   res.status(200).json({ message: "Candidate Deleted" });
 });

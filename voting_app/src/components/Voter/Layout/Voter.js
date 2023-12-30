@@ -7,20 +7,20 @@ const Voter = () => {
   const navigate = useNavigate();
 
   const handleSubmitLogout = () => {
-    axios
-      .get(`${SERVER_URL}/api/voter/logout`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        // console.log(res.data.message, "Logout successful");
-        localStorage.clear();
-        alert(res.data.message);
+    // axios
+    //   .get(`${SERVER_URL}/api/voter/logout`, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => {
+    //     // console.log(res.data.message, "Logout successful");
+    //     localStorage.clear();
+    //     alert(res.data.message);
         navigate("/");
-      })
-      .catch((err) => {
-        // console.error("Logout Failed:", err);
-        alert("Logout Failed:", err);
-      });
+      // })
+      // .catch((err) => {
+      //   // console.error("Logout Failed:", err);
+      //   alert("Logout Failed:", err);
+      // });
   };
 
   return (

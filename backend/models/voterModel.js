@@ -5,37 +5,46 @@ const voterSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     mobile: {
       type: String,
-      required: true,
-      unique: true,
+      // required: true,
+     
+       
+    },
+    otp:
+    {
+      type:String,
+      // required:true,
     },
     adharNumber: {
       type: String,
-      required: true,
-    },
-    adhar: {
-      type: String,
-      required: true,
-    },
-    isVoted: {
-      type: Boolean,
-    },
-  },
-  { versionKey: false }
-);
-
-voterSchema.methods.getJWTToken = function () {
-  return jwt.sign(
-    {
-      _id: this._id,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "15d",
     }
-  );
-};
+   
+//     },
+//     adhar: {
+//       type: String,
+    
+//     },
+   
+//     isVoted: {
+//       type: Boolean,
+//     },
+//   },
+//   { versionKey: false }
+
+  });
+
+// voterSchema.methods.getJWTToken = function () {
+//   return jwt.sign(
+//     {
+//       _id: this._id,
+//     },
+//     process.env.JWT_SECRET,
+//     {
+//       expiresIn: "15d",
+//     }
+//   );
+// };
 module.exports = mongoose.model("Voter", voterSchema);

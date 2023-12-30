@@ -4,26 +4,29 @@ import Voter from "../Layout/Voter";
 import { SERVER_URL } from "../../../API/api";
 
 const Profile = () => {
-  const [voterDetails, setVoterDetails] = useState("");
-  // console.log("voterDetails",voterDetails);
-
-  useEffect(() => {
-    fetchVoter();
-  }, []);
+  const [voterDetails, setVoterDetails] = useState({
+     name: "",
+    mobile: "",
+    adharNumber: "",
+    isVoted: false,
+  });
 
   const fetchVoter = async () => {
     try {
-      const response = await axios.get(`${SERVER_URL}/api/voter/me`, {
+      const response = await axios.get(`${SERVER_URL}/api/voter/getdetails`, {
         withCredentials: true,
       });
-      // console.log(response, "response");
       const data = response.data;
-      setVoterDetails(data.voter);
+      setVoterDetails(data);
+      console.log(voterDetails); // Log the fetched data
     } catch (error) {
       console.log("Error fetching Voter Data:", error.message);
     }
   };
 
+  useEffect(() => {
+    fetchVoter();
+  }, []);
   return (
     <div>
       <Voter />
@@ -43,7 +46,7 @@ const Profile = () => {
               />
             </label>
             <label>
-              Mobile Number :
+              Mobile Number:
               <input
                 required
                 type='number'
@@ -54,7 +57,7 @@ const Profile = () => {
               />
             </label>
             <label>
-              Aadhaar Number :
+              Aadhaar Number:
               <input
                 required
                 type='number'
@@ -65,13 +68,13 @@ const Profile = () => {
               />
             </label>
             <label>
-              Is Voted :
+              Is Voted:
               <input
                 required
-                type='boolean'
+                type='text'
                 autoComplete='off'
                 name='isVoted'
-                value={voterDetails.isVoted}
+                value={voterDetails.isVoted ? "Yes" : "No"}
                 readOnly={true}
               />
             </label>

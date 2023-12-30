@@ -168,19 +168,21 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../img/voting-app-high-resolution-logo-color-on-transparent-background.png";
 import { SERVER_URL } from "../../API/api";
 import { auth, sendOTP } from "firebase/auth";
-// import OTPPage from "./OTPPage";
+// import OTPPage from "./OTPPage";yahi page hana bas ha error ky arha h 
 const Login = () => {
+  const [valid,setvalid]=useState(false);
   const [adminName, setAdminName] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [adhar, setAdhar] = useState("");
+  const [otp,setotp]=useState("");
 
   const navigate = useNavigate();
 
-
   const handleSubmitAdmin = (e) => {
     e.preventDefault();
+   
     axios
       .post(
         `${SERVER_URL}/api/admin/login`,
@@ -212,17 +214,17 @@ const Login = () => {
 
   const handleSubmitVoter = (e) => {
     e.preventDefault();
+    console.log(otp,name)
     axios
       .post(
-        `${SERVER_URL}/api/voter/voterlogin`,
-        { name, mobile, adhar },
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-          withCredentials: true,
-        }
-      )
+        `${SERVER_URL}/api/voter/voterlogin`, { name, mobile, adhar,otp })
+      //   {
+      //     headers: {
+      //       "Content-type": "application/json",
+      //     },
+      //     withCredentials: true,
+      //   }
+      // )
       .then((res) => {
         // console.log(res);
         // console.log(res.data);
@@ -237,7 +239,38 @@ const Login = () => {
         alert(err.response.data.message);
       });
   };
-
+  const sendNumber = () => {
+    // console.log('hello')   // ye call ha sahi ha no check karna
+    axios.post(`${SERVER_URL}/api/voter/numbersend`, { number:mobile,name ,adhar})
+      .then(response => {
+        // Handle the response from the backend if needed
+        console.log('Number sent successfully!', response);
+      })
+      .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error('Error sending number:', error);
+      });
+  }
+  const  sendotp=()=>
+  {
+    axios.post(`${SERVER_URL}/api/voter/otpverification`,{otp,name})
+    .then(response => {
+      // Handle the response from the backend if needed
+      console.log('Number sent successfully!', response);
+    })
+    .catch(error => {
+      // Handle any errors that occurred during the request
+      console.error('Error sending number:', error);
+    });
+  }
+  
+  const validatephonenumber=()=>
+  {
+   
+      setvalid(true);
+   
+  }
+ //Frontend show karna 
   return (
     <div>
       <div>
@@ -271,12 +304,12 @@ const Login = () => {
             {/* <Link to="/admin">
             <input className=" btn btn_login" type="submit" value="Login" />
             </Link> */}
-            <button className=' btn btn_login' type='submit' value='Login'>
+            <button className='btn btn_login' type='submit' value='Login'>
               Login
             </button>
           </form>
         </div>
-        {/* For Voter Login */}
+        {/* For Voter Login dekh kiye */} 
         <div className='form'>
           <h1>Voter Login</h1>
           <form onSubmit={handleSubmitVoter}>
@@ -299,8 +332,15 @@ const Login = () => {
               name='mobile'
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
-            />
+              />
+             <button onClick={() => { sendNumber(); validatephonenumber(); }} className=' btn btn_login'>Validate number</button>
 
+             {
+              valid && (<div>
+                <input type='text' placeholder="enter otp" value={otp} onChange={(e)=>setotp(e.target.value)}/>
+                <button onClick={sendotp} className=' btn btn_login'>Validate OTP</button>
+              </div>)
+             }
 
             <label>Aadhaar Number:</label>
             <input
@@ -312,7 +352,8 @@ const Login = () => {
               value={adhar}
               onChange={(e) => setAdhar(e.target.value)}
             />
-             {/* <Link to="/OTPPage"> */}
+            
+          
             <button className=' btn btn_login' type='submit' value='Login'>
               Login
             </button>
